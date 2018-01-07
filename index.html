@@ -34,6 +34,7 @@
 
         var my_val = ['height_group', 'weight_group', 'avg_group'];
 
+        // Add a button
         var buttons = d3.select("body")
                         .append("div")
                         .attr("class", "val_buttons")
@@ -57,6 +58,7 @@
 
         function update(val) {
 
+          // Remove existed svg before update
           d3.select('svg')
             .remove();
 
@@ -71,7 +73,8 @@
 
           var s = myChart.addSeries(["handedness"], dimple.plot.bar);
           s.aggregate = dimple.aggregateMethod.avg;
-
+          // Using the afterDraw callback means this code still works with animated draws(e.g myChart.draw(1000)) 
+          // or storyboards (though an onTick callback should also be used to clear the text from the previous frame)
           s.afterDraw = function(shape, data) {
               //get the shape as a d3 selection
             var s = d3.select(shape),
@@ -116,8 +119,7 @@
 
           update(d);
         });
-        // Using the afterDraw callback means this code still works with animated draws(e.g myChart.draw(1000)) 
-        // or storyboards (though an onTick callback should also be used to clear the text from the previous frame)
+
 
         
       }
